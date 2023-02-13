@@ -24,13 +24,16 @@ func Fetch_adminHome() (helpers.ResponseAdmin, error) {
 	start := time.Now()
 
 	sql_select := `SELECT 
-			username , name, idadmin,
-			statuslogin, to_char(COALESCE(lastlogin,now()), 'YYYY-MM-DD HH24:MI:SS'), joindate, 
-			ipaddress, timezone  
+			username , name, idadmin, statuslogin, 
+			to_char(COALESCE(lastlogin,now()), 'YYYY-MM-DD HH24:MI:SS'), 
+			to_char(COALESCE(joindate,now()), 'YYYY-MM-DD HH24:MI:SS'), 
+			ipaddress, timezone, 
+			createadmin, to_char(COALESCE(createdateadmin,now()), 'YYYY-MM-DD HH24:MI:SS'), 
+			updateadmin, to_char(COALESCE(updatedateadmin,now()), 'YYYY-MM-DD HH24:MI:SS') 
 			FROM ` + configs.DB_tbl_admin + ` 
 			ORDER BY lastlogin DESC 
 		`
-
+	log.Println(sql_select)
 	row, err := con.QueryContext(ctx, sql_select)
 
 	var no int = 0
@@ -38,14 +41,15 @@ func Fetch_adminHome() (helpers.ResponseAdmin, error) {
 	for row.Next() {
 		no += 1
 		var (
-			username_db, name_db, idadminlevel_db                                string
-			statuslogin_db, lastlogin_db, joindate_db, ipaddress_db, timezone_db string
+			username_db, name_db, idadminlevel_db                                  string
+			statuslogin_db, lastlogin_db, joindate_db, ipaddress_db, timezone_db   string
+			createadmin_db, createdateadmin_db, updateadmin_db, updatedateadmin_db string
 		)
 
 		err = row.Scan(
-			&username_db, &name_db, &idadminlevel_db,
-			&statuslogin_db, &lastlogin_db, &joindate_db,
-			&ipaddress_db, &timezone_db)
+			&username_db, &name_db, &idadminlevel_db, &statuslogin_db, &lastlogin_db, &joindate_db,
+			&ipaddress_db, &timezone_db,
+			&createadmin_db, &createdateadmin_db, &updateadmin_db, &updatedateadmin_db)
 
 		helpers.ErrorCheck(err)
 		if statuslogin_db == "Y" {
@@ -54,14 +58,24 @@ func Fetch_adminHome() (helpers.ResponseAdmin, error) {
 		if lastlogin_db == "0000-00-00 00:00:00" {
 			lastlogin_db = ""
 		}
-		obj.Username = username_db
-		obj.Nama = name_db
-		obj.Rule = idadminlevel_db
-		obj.Joindate = joindate_db
-		obj.Timezone = timezone_db
-		obj.Lastlogin = lastlogin_db
-		obj.LastIpaddress = ipaddress_db
-		obj.Status = statuslogin_db
+		create := ""
+		update := ""
+		if createadmin_db != "" {
+			create = createadmin_db + ", " + createdateadmin_db
+		}
+		if updateadmin_db != "" {
+			update = updateadmin_db + ", " + updatedateadmin_db
+		}
+		obj.Admin_username = username_db
+		obj.Admin_nama = name_db
+		obj.Admin_rule = idadminlevel_db
+		obj.Admin_joindate = joindate_db
+		obj.Admin_timezone = timezone_db
+		obj.Admin_lastlogin = lastlogin_db
+		obj.Admin_lastipaddres = ipaddress_db
+		obj.Admin_status = statuslogin_db
+		obj.Admin_create = create
+		obj.Admin_update = update
 		arraobj = append(arraobj, obj)
 		msg = "Success"
 	}

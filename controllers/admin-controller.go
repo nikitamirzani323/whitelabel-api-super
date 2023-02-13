@@ -13,11 +13,11 @@ import (
 	"github.com/nikitamirzani323/whitelabel/whitelabel_api_super/models"
 )
 
-const Fieldadmin_home_redis = "LISTADMIN_BACKEND_ISBPANEL"
+const Fieldadmin_home_redis = "LISTADMIN_BACKEND_WHITELABEL"
 
 func Adminhome(c *fiber.Ctx) error {
-	var obj entities.Responseredis_adminhome
-	var arraobj []entities.Responseredis_adminhome
+	var obj entities.Model_admin
+	var arraobj []entities.Model_admin
 	var obj_listruleadmin entities.Responseredis_adminrule
 	var arraobj_listruleadmin []entities.Responseredis_adminrule
 	render_page := time.Now()
@@ -34,6 +34,8 @@ func Adminhome(c *fiber.Ctx) error {
 		admin_lastlogin, _ := jsonparser.GetString(value, "admin_lastlogin")
 		admin_lastipaddres, _ := jsonparser.GetString(value, "admin_lastipaddres")
 		admin_status, _ := jsonparser.GetString(value, "admin_status")
+		admin_create, _ := jsonparser.GetString(value, "admin_create")
+		admin_update, _ := jsonparser.GetString(value, "admin_update")
 
 		obj.Admin_username = admin_username
 		obj.Admin_nama = admin_nama
@@ -43,6 +45,8 @@ func Adminhome(c *fiber.Ctx) error {
 		obj.Admin_lastlogin = admin_lastlogin
 		obj.Admin_lastipaddres = admin_lastipaddres
 		obj.Admin_status = admin_status
+		obj.Admin_create = admin_create
+		obj.Admin_update = admin_update
 		arraobj = append(arraobj, obj)
 	})
 	jsonparser.ArrayEach(listruleadmin_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
