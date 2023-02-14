@@ -101,8 +101,8 @@ func Init() *fiber.App {
 	app.Post("/api/slidersave", middleware.JWTProtected(), controllers.Slidersave)
 	app.Post("/api/sliderdelete", middleware.JWTProtected(), controllers.Sliderdelete)
 
-	app.Post("/api/domain", middleware.JWTProtected(), controllers.Domainhome)
-	app.Post("/api/domainsave", middleware.JWTProtected(), controllers.DomainSave)
+	app.Post("/api/curr", middleware.JWTProtected(), controllers.Currencyhome)
+	app.Post("/api/currsave", middleware.JWTProtected(), controllers.CurrSave)
 
 	app.Post("/api/webagen", middleware.JWTProtected(), controllers.Websiteagenhome)
 	app.Post("/api/webagensave", middleware.JWTProtected(), controllers.Websiteagensave)

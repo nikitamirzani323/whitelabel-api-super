@@ -9,7 +9,7 @@ const (
 	DB_tbl_mst_banner            string = "tbl_mst_banner"
 	DB_tbl_mst_websiteagen       string = "tbl_mst_websiteagen"
 	DB_tbl_mst_game              string = "tbl_mst_game"
-	DB_tbl_mst_domain            string = "tbl_mst_domain"
+	DB_tbl_mst_currency          string = "tbl_mst_currency"
 	DB_tbl_mst_providerslot      string = "tbl_mst_providerslot"
 	DB_tbl_mst_version           string = "tbl_mst_version"
 	DB_tbl_mst_category          string = "tbl_mst_categorynews"

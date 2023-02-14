@@ -196,18 +196,17 @@ func Save_adminHome(admin, username, password, nama, rule, status, sData string)
 			sql_insert := `
 				insert into
 				` + configs.DB_tbl_admin + ` (
-					username , password, idadmin, name, statuslogin, joindate, 
+					username , password, idadmin, name, statuslogin, 
 					createadmin, createdateadmin
 				) values (
-					$1, $2, $3, $4, $5, $6, 
-					$7, $8
+					$1, $2, $3, $4, $5,  
+					$6, $7
 				)
 			`
 			hashpass := helpers.HashPasswordMD5(password)
 			flag_insert, msg_insert := Exec_SQL(sql_insert, configs.DB_tbl_admin, "INSERT",
 				username, hashpass,
 				rule, nama, status,
-				tglnow.Format("YYYY-MM-DD"),
 				admin,
 				tglnow.Format("YYYY-MM-DD HH:mm:ss"))
 
@@ -232,12 +231,8 @@ func Save_adminHome(admin, username, password, nama, rule, status, sData string)
 			`
 
 			flag_update, msg_update := Exec_SQL(sql_update, configs.DB_tbl_admin, "UPDATE",
-				nama,
-				rule,
-				status,
-				admin,
-				tglnow.Format("YYYY-MM-DD HH:mm:ss"),
-				username)
+				nama, rule, status,
+				admin, tglnow.Format("YYYY-MM-DD HH:mm:ss"), username)
 
 			if flag_update {
 				flag = true
@@ -256,13 +251,8 @@ func Save_adminHome(admin, username, password, nama, rule, status, sData string)
 				WHERE username =$7 
 			`
 			flag_update, msg_update := Exec_SQL(sql_update2, configs.DB_tbl_admin, "UPDATE",
-				nama,
-				hashpass,
-				rule,
-				status,
-				admin,
-				tglnow.Format("YYYY-MM-DD HH:mm:ss"),
-				username)
+				nama, hashpass, rule, status,
+				admin, tglnow.Format("YYYY-MM-DD HH:mm:ss"), username)
 
 			if flag_update {
 				flag = true
@@ -274,17 +264,10 @@ func Save_adminHome(admin, username, password, nama, rule, status, sData string)
 		}
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
 
 	return res, nil
 }
