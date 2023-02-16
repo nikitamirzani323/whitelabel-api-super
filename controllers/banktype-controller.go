@@ -13,43 +13,36 @@ import (
 	"github.com/nikitamirzani323/whitelabel/whitelabel_api_super/models"
 )
 
-const Fieldbanner_home_redis = "LISTBANNER_BACKEND_ISBPANEL"
-const Fieldbanner_frontend_redis = "LISTBANNER_FRONTEND_ISBPANEL"
+const Fieldbanktype_home_redis = "LISTBANKTYPE_BACKEND_ISBPANEL"
 
-func Bannerhome(c *fiber.Ctx) error {
-	var obj entities.Model_banner
-	var arraobj []entities.Model_banner
+func Banktypehome(c *fiber.Ctx) error {
+	var obj entities.Model_banktype
+	var arraobj []entities.Model_banktype
 	render_page := time.Now()
-	resultredis, flag := helpers.GetRedis(Fieldbanner_home_redis)
+	resultredis, flag := helpers.GetRedis(Fieldbanktype_home_redis)
 	jsonredis := []byte(resultredis)
 	message_RD, _ := jsonparser.GetString(jsonredis, "message")
 	record_RD, _, _, _ := jsonparser.Get(jsonredis, "record")
 	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
-		banner_id, _ := jsonparser.GetInt(value, "banner_id")
-		banner_name, _ := jsonparser.GetString(value, "banner_name")
-		banner_url, _ := jsonparser.GetString(value, "banner_url")
-		banner_urlwebsite, _ := jsonparser.GetString(value, "banner_urlwebsite")
-		banner_posisi, _ := jsonparser.GetString(value, "banner_posisi")
-		banner_device, _ := jsonparser.GetString(value, "banner_device")
-		banner_display, _ := jsonparser.GetInt(value, "banner_display")
-		banner_status, _ := jsonparser.GetString(value, "banner_status")
-		banner_create, _ := jsonparser.GetString(value, "banner_create")
-		banner_update, _ := jsonparser.GetString(value, "banner_update")
+		banktype_id, _ := jsonparser.GetString(value, "banktype_id")
+		banktype_nmcatebank, _ := jsonparser.GetString(value, "banktype_nmcatebank")
+		banktype_name, _ := jsonparser.GetString(value, "banktype_name")
+		banktype_img, _ := jsonparser.GetString(value, "banktype_img")
+		banktype_status, _ := jsonparser.GetString(value, "banktype_status")
+		banktype_create, _ := jsonparser.GetString(value, "banktype_create")
+		banktype_update, _ := jsonparser.GetString(value, "banktype_update")
 
-		obj.Banner_id = int(banner_id)
-		obj.Banner_name = banner_name
-		obj.Banner_url = banner_url
-		obj.Banner_urlwebsite = banner_urlwebsite
-		obj.Banner_posisi = banner_posisi
-		obj.Banner_device = banner_device
-		obj.Banner_display = int(banner_display)
-		obj.Banner_status = banner_status
-		obj.Banner_create = banner_create
-		obj.Banner_update = banner_update
+		obj.Banktype_id = banktype_id
+		obj.Banktype_name = banktype_name
+		obj.Banktype_nmcatebank = banktype_nmcatebank
+		obj.Banktype_img = banktype_img
+		obj.Banktype_status = banktype_status
+		obj.Banktype_create = banktype_create
+		obj.Banktype_update = banktype_update
 		arraobj = append(arraobj, obj)
 	})
 	if !flag {
-		result, err := models.Fetch_bannerHome()
+		result, err := models.Fetch_banktypeHome()
 		if err != nil {
 			c.Status(fiber.StatusBadRequest)
 			return c.JSON(fiber.Map{
@@ -58,11 +51,11 @@ func Bannerhome(c *fiber.Ctx) error {
 				"record":  nil,
 			})
 		}
-		helpers.SetRedis(Fieldbanner_home_redis, result, 180*time.Minute)
-		log.Println("BANNER MYSQL")
+		helpers.SetRedis(Fieldbanktype_home_redis, result, 60*time.Minute)
+		log.Println("BANK TYPE MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("BANNER CACHE")
+		log.Println("BANK TYPE CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": message_RD,
