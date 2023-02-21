@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"log"
+	"fmt"
 	"strconv"
 
 	"github.com/go-playground/validator/v10"
@@ -90,9 +90,9 @@ func Home(c *fiber.Ctx) error {
 	name := claims["name"].(string)
 	temp_decp := helpers.Decryption(name)
 	client_username, idruleadmin := helpers.Parsing_Decry(temp_decp, "==")
-	log.Println(client_username)
-	log.Println(idruleadmin)
-	log.Println(client.Page)
+	fmt.Println(client_username)
+	fmt.Println(idruleadmin)
+	fmt.Println(client.Page)
 
 	ruleadmin := models.Get_AdminRule("ruleadmingroup", idruleadmin)
 	flag := models.Get_listitemsearch(ruleadmin, ",", client.Page)

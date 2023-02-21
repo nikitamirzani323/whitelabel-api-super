@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 	"time"
@@ -80,10 +81,10 @@ func Gamehome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldgame_home_redis+"_"+strconv.Itoa(client.Game_page)+"_"+client.Game_search, result, 1*time.Hour)
-		log.Println("AGEN MYSQL")
+		fmt.Println("AGEN MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("AGEN CACHE")
+		fmt.Println("AGEN CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     message_RD,

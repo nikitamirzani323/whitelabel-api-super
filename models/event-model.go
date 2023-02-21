@@ -3,7 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
-	"log"
+	"fmt"
 	"strconv"
 	"time"
 
@@ -126,11 +126,11 @@ func Save_event(
 		if flag_insert {
 			msg = "Succes"
 		} else {
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		}
 	} else {
 		totaldeposit := _TotalDetail(idrecord)
-		log.Println(totaldeposit)
+		fmt.Println(totaldeposit)
 		if totaldeposit > 0 {
 			sql_update := `
 				UPDATE 
@@ -148,7 +148,7 @@ func Save_event(
 			if flag_update {
 				msg = "Succes"
 			} else {
-				log.Println(msg_update)
+				fmt.Println(msg_update)
 			}
 		} else {
 			sql_update := `
@@ -167,7 +167,7 @@ func Save_event(
 			if flag_update {
 				msg = "Succes"
 			} else {
-				log.Println(msg_update)
+				fmt.Println(msg_update)
 			}
 		}
 
@@ -203,7 +203,7 @@ func Fetchdetail_event(idevent, idmemberagen int) (helpers.Response, error) {
 		sql_select += "AND A.idmemberagen='" + strconv.Itoa(idmemberagen) + "' "
 	}
 	sql_select += "ORDER BY A.createdateeventdetail DESC "
-	log.Println(sql_select)
+	fmt.Println(sql_select)
 
 	row, err := con.QueryContext(ctx, sql_select, idevent)
 	helpers.ErrorCheck(err)
@@ -393,7 +393,7 @@ func Savedetail_event(
 			if flag_insert {
 				msg = "Succes"
 			} else {
-				log.Println(msg_insert)
+				fmt.Println(msg_insert)
 			}
 		}
 		_updateEvent(admin, idevent)
@@ -432,7 +432,7 @@ func Updatedetailstatus_event(
 			admin, tglnow.Format("YYYY-MM-DD HH:mm:ss"), idrecord, idevent)
 
 		if !flag_update {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
 			msg = "Succes"
 		}
@@ -483,7 +483,7 @@ func _updateEvent(admin string, idrecord int) {
 			admin, tglnow.Format("YYYY-MM-DD HH:mm:ss"), idrecord)
 
 		if !flag_update {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 }
@@ -501,7 +501,7 @@ func _GetEvent(idevent int) int {
 	sql_select += "FROM " + configs.DB_tbl_trx_event + " "
 	sql_select += "WHERE idevent = $1 "
 
-	log.Println(sql_select)
+	fmt.Println(sql_select)
 	row := con.QueryRowContext(ctx, sql_select, idevent)
 	switch e := row.Scan(&mindeposit_db); e {
 	case sql.ErrNoRows:
@@ -525,7 +525,7 @@ func _TotalDetail(idevent int) int {
 	sql_select += "FROM " + configs.DB_tbl_trx_event_detail + " "
 	sql_select += "WHERE idevent = $1 "
 
-	log.Println(sql_select)
+	fmt.Println(sql_select)
 	row := con.QueryRowContext(ctx, sql_select, idevent)
 	switch e := row.Scan(&mindeposit_db); e {
 	case sql.ErrNoRows:

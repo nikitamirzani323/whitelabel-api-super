@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -62,10 +63,10 @@ func Providerslothome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldproviderslot_home_redis, result, 60*time.Minute)
-		log.Println("PROVIDER SLOT MYSQL")
+		fmt.Println("PROVIDER SLOT MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("PROVIDER SLOT CACHE")
+		fmt.Println("PROVIDER SLOT CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": "Success",

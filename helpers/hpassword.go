@@ -3,7 +3,7 @@ package helpers
 import (
 	"crypto/md5"
 	"encoding/hex"
-	"log"
+	"fmt"
 	"math/rand"
 	"strconv"
 	s "strings"
@@ -16,7 +16,7 @@ import (
 func HashPassword(password string) string {
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
-		log.Println(err)
+		fmt.Println(err)
 	}
 	return string(hash)
 }

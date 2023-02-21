@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -50,10 +51,10 @@ func Sliderhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldslider_home_redis, result, 30*time.Minute)
-		log.Println("SLIDER MYSQL")
+		fmt.Println("SLIDER MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("SLIDER CACHE")
+		fmt.Println("SLIDER CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": message_RD,

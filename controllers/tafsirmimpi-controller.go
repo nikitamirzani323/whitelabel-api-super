@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 	"time"
@@ -92,10 +93,10 @@ func Tafsirmimpihome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Field_tafsirmimpihome_redis+"_"+strconv.Itoa(client.Tafsirmimpi_page)+"_"+client.Tafsirmimpi_search, result, 30*time.Minute)
-		log.Println("TAFSIR MIMPI MYSQL")
+		fmt.Println("TAFSIR MIMPI MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("TAFSIR MIMPI CACHE")
+		fmt.Println("TAFSIR MIMPI CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     message_RD,

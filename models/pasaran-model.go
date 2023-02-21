@@ -3,6 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -166,7 +167,7 @@ func Save_pasaran(
 			if insert > 0 {
 				flag = true
 				msg = "Succes"
-				log.Println("Data Berhasil di save")
+				fmt.Println("Data Berhasil di save")
 			}
 		} else {
 			msg = "Duplicate Entry"
@@ -195,7 +196,7 @@ func Save_pasaran(
 			msg = "Succes"
 			log.Printf("Update PASARAN Success : %s\n", idrecord)
 		} else {
-			log.Println("Update PASARAN failed")
+			fmt.Println("Update PASARAN failed")
 		}
 	}
 
@@ -292,7 +293,7 @@ func Save_keluaran(admin, idpasaran, tanggal, nomor string) (helpers.Response, e
 		if insert > 0 {
 			flag = true
 			msg = "Succes"
-			log.Println("Data Berhasil di save")
+			fmt.Println("Data Berhasil di save")
 		}
 	} else {
 		msg = "Duplicate Entry"
@@ -331,7 +332,7 @@ func Delete_keluaran(admin, idpasaran string, idtrxkeluaran int) (helpers.Respon
 		if delete > 0 {
 			flag = true
 			msg = "Succes"
-			log.Println("Data Berhasil di delete")
+			fmt.Println("Data Berhasil di delete")
 		}
 	}
 
@@ -425,7 +426,7 @@ func Save_prediksi(admin, idpasaran, tanggal, bbfs, nomor string) (helpers.Respo
 		if insert > 0 {
 			flag = true
 			msg = "Succes"
-			log.Println("Data Berhasil di save")
+			fmt.Println("Data Berhasil di save")
 		}
 	} else {
 		msg = "Duplicate Entry"
@@ -464,7 +465,7 @@ func Delete_prediksi(admin, idpasaran string, idprediksi int) (helpers.Response,
 		if delete > 0 {
 			flag = true
 			msg = "Succes"
-			log.Println("Data Berhasil di delete")
+			fmt.Println("Data Berhasil di delete")
 		}
 	}
 

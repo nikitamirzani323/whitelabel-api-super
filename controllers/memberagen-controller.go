@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 	"time"
@@ -63,10 +64,10 @@ func Memberhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldmember_home_redis, result, 60*time.Minute)
-		log.Println("MEMBER  MYSQL")
+		fmt.Println("MEMBER  MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("MEMBER CACHE")
+		fmt.Println("MEMBER CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": "Success",
@@ -135,10 +136,10 @@ func Memberhomeselect(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldmemberselect_home_redis+"_"+strconv.Itoa(client.Memberagen_idwebagen), result, 60*time.Minute)
-		log.Println("MEMBER AGEN SELECT  MYSQL")
+		fmt.Println("MEMBER AGEN SELECT  MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("MEMBER AGEN SELECT CACHE")
+		fmt.Println("MEMBER AGEN SELECT CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": "Success",

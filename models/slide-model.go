@@ -3,7 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
-	"log"
+	"fmt"
 	"strconv"
 	"time"
 
@@ -111,9 +111,9 @@ func Save_slide(admin, sdata, url string, idmovie, position int) (helpers.Respon
 		if flag_insert {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		} else {
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		}
 	}
 
@@ -157,7 +157,7 @@ func Delete_slider(admin string, idslide int) (helpers.Response, error) {
 		if delete > 0 {
 			flag = true
 			msg = "Succes"
-			log.Println("Data Berhasil di delete")
+			fmt.Println("Data Berhasil di delete")
 		}
 	} else {
 		msg = "Data Not Found"

@@ -270,7 +270,7 @@ func Save_movie(admin, name, label, slug, tipemovie, descp, urlthum, listgenre, 
 		if insert > 0 {
 			flag = true
 			msg = "Succes"
-			log.Println("Data Berhasil di save")
+			fmt.Println("Data Berhasil di save")
 		}
 		if flag {
 			//GENRE
@@ -303,7 +303,7 @@ func Save_movie(admin, name, label, slug, tipemovie, descp, urlthum, listgenre, 
 				if insertgenre > 0 {
 					flag = true
 					msg = "Succes"
-					log.Println("Data GENERE Berhasil di save")
+					fmt.Println("Data GENERE Berhasil di save")
 				}
 			})
 
@@ -337,7 +337,7 @@ func Save_movie(admin, name, label, slug, tipemovie, descp, urlthum, listgenre, 
 				if insertsource > 0 {
 					flag = true
 					msg = "Succes"
-					log.Println("Data SOURCE Berhasil di save")
+					fmt.Println("Data SOURCE Berhasil di save")
 				}
 			})
 		}
@@ -357,9 +357,9 @@ func Save_movie(admin, name, label, slug, tipemovie, descp, urlthum, listgenre, 
 		if flag_update {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 
 		if flag {
@@ -435,7 +435,7 @@ func Save_movie(admin, name, label, slug, tipemovie, descp, urlthum, listgenre, 
 				if insertgenre > 0 {
 					flag = true
 					msg = "Succes"
-					log.Println("Data GENERE Berhasil di save")
+					fmt.Println("Data GENERE Berhasil di save")
 				}
 			})
 
@@ -469,7 +469,7 @@ func Save_movie(admin, name, label, slug, tipemovie, descp, urlthum, listgenre, 
 				if insertsource > 0 {
 					flag = true
 					msg = "Succes"
-					log.Println("Data SOURCE Berhasil di save")
+					fmt.Println("Data SOURCE Berhasil di save")
 				}
 			})
 		}
@@ -517,7 +517,7 @@ func Delete_movie(admin string, idrecord int) (helpers.Response, error) {
 		if deletegenre > 0 {
 			flag = true
 			msg = "Succes"
-			log.Println("Data Genre Berhasil di delete")
+			fmt.Println("Data Genre Berhasil di delete")
 		}
 
 		//DELETE SOURCE
@@ -537,7 +537,7 @@ func Delete_movie(admin string, idrecord int) (helpers.Response, error) {
 		if deletesource > 0 {
 			flag = true
 			msg = "Succes"
-			log.Println("Data Source Berhasil di delete")
+			fmt.Println("Data Source Berhasil di delete")
 		}
 
 		//DELETE MOVIE
@@ -557,7 +557,7 @@ func Delete_movie(admin string, idrecord int) (helpers.Response, error) {
 		if delete > 0 {
 			flag = true
 			msg = "Succes"
-			log.Println("Data Movie Berhasil di delete")
+			fmt.Println("Data Movie Berhasil di delete")
 		}
 	} else {
 		msg = "Data Not Found"
@@ -785,7 +785,7 @@ func Save_movieseries(admin, name, label, slug, tipemovie, descp, urlthum, listg
 		if insert > 0 {
 			flag = true
 			msg = "Succes"
-			log.Println("Data Berhasil di save")
+			fmt.Println("Data Berhasil di save")
 		}
 		if flag {
 			//GENRE
@@ -818,7 +818,7 @@ func Save_movieseries(admin, name, label, slug, tipemovie, descp, urlthum, listg
 				if insertgenre > 0 {
 					flag = true
 					msg = "Succes"
-					log.Println("Data GENERE Berhasil di save")
+					fmt.Println("Data GENERE Berhasil di save")
 				}
 			})
 		}
@@ -844,7 +844,7 @@ func Save_movieseries(admin, name, label, slug, tipemovie, descp, urlthum, listg
 		if update > 0 {
 			flag = true
 			msg = "Succes"
-			log.Println("Data Berhasil di update")
+			fmt.Println("Data Berhasil di update")
 		}
 		if flag {
 			//DELETE GENRE
@@ -898,7 +898,7 @@ func Save_movieseries(admin, name, label, slug, tipemovie, descp, urlthum, listg
 				if insertgenre > 0 {
 					flag = true
 					msg = "Succes"
-					log.Println("Data GENERE Berhasil di save")
+					fmt.Println("Data GENERE Berhasil di save")
 				}
 			})
 		}
@@ -987,9 +987,9 @@ func Save_season(admin, name, sdata string, idrecord, idmovie, display int) (hel
 		if flag_insert {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		} else {
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		}
 	} else {
 		sql_update := `
@@ -1003,9 +1003,9 @@ func Save_season(admin, name, sdata string, idrecord, idmovie, display int) (hel
 		if flag_update {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 
@@ -1042,9 +1042,9 @@ func Delete_season(admin string, idrecord, idmovie int) (helpers.Response, error
 		if flag_delete {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_delete)
+			fmt.Println(msg_delete)
 		} else {
-			log.Println(msg_delete)
+			fmt.Println(msg_delete)
 		}
 	} else {
 		msg = "Data Not Found"
@@ -1158,9 +1158,9 @@ func Save_episode(admin, name, urlsource, sdata string, idrecord, idseason, disp
 		if flag_insert {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		} else {
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		}
 
 		sql_insertsource := `
@@ -1180,9 +1180,9 @@ func Save_episode(admin, name, urlsource, sdata string, idrecord, idseason, disp
 		if flag_insertsource {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_insertsource)
+			fmt.Println(msg_insertsource)
 		} else {
-			log.Println(msg_insertsource)
+			fmt.Println(msg_insertsource)
 		}
 
 	}
@@ -1220,7 +1220,7 @@ func Delete_episode(admin string, idrecord, idseason int) (helpers.Response, err
 		if flag_deletesource {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_deletesource)
+			fmt.Println(msg_deletesource)
 
 			sql_delete := `
 				DELETE FROM
@@ -1233,12 +1233,12 @@ func Delete_episode(admin string, idrecord, idseason int) (helpers.Response, err
 			if flag_episode {
 				flag = true
 				msg = "Succes"
-				log.Println(msg_episode)
+				fmt.Println(msg_episode)
 			} else {
-				log.Println(msg_episode)
+				fmt.Println(msg_episode)
 			}
 		} else {
-			log.Println(msg_deletesource)
+			fmt.Println(msg_deletesource)
 		}
 
 	} else {
@@ -1279,7 +1279,7 @@ func Fetch_movieminiHome(search string) (helpers.Response, error) {
 		sql_select += "WHERE LOWER(movietitle) LIKE '%" + strings.ToLower(search) + "%' "
 		sql_select += "ORDER BY createdatemovie DESC LIMIT 100 "
 	}
-	log.Println(sql_select)
+	fmt.Println(sql_select)
 	row, err := con.QueryContext(ctx, sql_select)
 	helpers.ErrorCheck(err)
 	for row.Next() {
@@ -1393,9 +1393,9 @@ func Save_genre(admin, name, sdata string, idrecord, display int) (helpers.Respo
 		if flag_insert {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		} else {
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		}
 	} else {
 		sql_update := `
@@ -1413,9 +1413,9 @@ func Save_genre(admin, name, sdata string, idrecord, display int) (helpers.Respo
 		if flag_update {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 
@@ -1454,9 +1454,9 @@ func Delete_genre(admin string, idrecord int) (helpers.Response, error) {
 			if flag_delete {
 				flag = true
 				msg = "Succes"
-				log.Println(msg_delete)
+				fmt.Println(msg_delete)
 			} else {
-				log.Println(msg_delete)
+				fmt.Println(msg_delete)
 			}
 		} else {
 			msg = "Cannot Delete"

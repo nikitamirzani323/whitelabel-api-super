@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -48,10 +49,10 @@ func Catebankhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldcatebank_home_redis, result, 60*time.Minute)
-		log.Println("CATEBANK MYSQL")
+		fmt.Println("CATEBANK MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("CATEBANK CACHE")
+		fmt.Println("CATEBANK CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": "Success",

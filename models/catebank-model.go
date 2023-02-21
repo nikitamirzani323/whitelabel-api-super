@@ -2,7 +2,7 @@ package models
 
 import (
 	"context"
-	"log"
+	"fmt"
 	"strconv"
 	"time"
 
@@ -96,7 +96,7 @@ func Save_catebank(admin, name, status, sData string, idrecord int) (helpers.Res
 		if flag_insert {
 			msg = "Succes"
 		} else {
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		}
 	} else {
 		sql_update := `
@@ -113,7 +113,7 @@ func Save_catebank(admin, name, status, sData string, idrecord int) (helpers.Res
 		if flag_update {
 			msg = "Succes"
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 

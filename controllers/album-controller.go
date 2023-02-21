@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 	"time"
@@ -88,10 +89,10 @@ func Albumhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldalbum_home_redis+"_"+strconv.Itoa(client.Album_page), result, 60*time.Minute)
-		log.Println("ALBUM MYSQL")
+		fmt.Println("ALBUM MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("ALBUM CACHE")
+		fmt.Println("ALBUM CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     "Success",

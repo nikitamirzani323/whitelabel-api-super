@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 	"time"
@@ -83,10 +84,10 @@ func Websiteagenhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldwebsiteagen_home_redis+"_"+strconv.Itoa(client.Websiteagen_page)+"_"+client.Websiteagen_search, result, 1*time.Hour)
-		log.Println("WEBSITEAGEN MYSQL")
+		fmt.Println("WEBSITEAGEN MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("WEBSITEAGEN CACHE")
+		fmt.Println("WEBSITEAGEN CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     message_RD,

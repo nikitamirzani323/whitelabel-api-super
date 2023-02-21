@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 	"time"
@@ -122,10 +123,10 @@ func Crmhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldcrm_home_redis+"_"+client.Crm_status+"_"+strconv.Itoa(client.Crm_page)+"_"+client.Crm_search, result, 60*time.Minute)
-		log.Println("CRM  MYSQL")
+		fmt.Println("CRM  MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("CRM  CACHE")
+		fmt.Println("CRM  CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     "Success",
@@ -203,10 +204,10 @@ func Crmsales(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldcrmsales_home_redis+"_"+client.Crmsales_phone+"_"+client.Crmsales_status, result, 60*time.Minute)
-		log.Println("CRM SALES  MYSQL")
+		fmt.Println("CRM SALES  MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("CRM SALES  CACHE")
+		fmt.Println("CRM SALES  CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     "Success",
@@ -278,10 +279,10 @@ func Crmdeposit(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldcrmdeposit_home_redis+"_"+strconv.Itoa(client.Crmsales_idcrmsales), result, 60*time.Minute)
-		log.Println("CRM DEPOSIT  MYSQL")
+		fmt.Println("CRM DEPOSIT  MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("CRM DEPOSIT  CACHE")
+		fmt.Println("CRM DEPOSIT  CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     "Success",
@@ -364,10 +365,10 @@ func Crmisbtvhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldcrmisbtv_home_redis+"_"+strconv.Itoa(client.Crmisbtv_page)+"_"+client.Crmisbtv_search, result, 60*time.Minute)
-		log.Println("CRM ISBTV MYSQL")
+		fmt.Println("CRM ISBTV MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("CRM ISBTV CACHE")
+		fmt.Println("CRM ISBTV CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     "Success",
@@ -438,10 +439,10 @@ func Crmduniafilm(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldcrmduniafilm_home_redis+"_"+strconv.Itoa(client.Crmisbtv_page)+"_"+client.Crmisbtv_search, result, 60*time.Minute)
-		log.Println("CRM DUNIA FILM MYSQL")
+		fmt.Println("CRM DUNIA FILM MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("CRM DUNIA FILM CACHE")
+		fmt.Println("CRM DUNIA FILM CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     "Success",
@@ -633,7 +634,7 @@ func CrmSalesdelete(c *fiber.Ctx) error {
 	name := claims["name"].(string)
 	temp_decp := helpers.Decryption(name)
 	_, idruleadmin := helpers.Parsing_Decry(temp_decp, "==")
-	log.Println("RULE :" + client.Page)
+	fmt.Println("RULE :" + client.Page)
 	ruleadmin := models.Get_AdminRule("ruleadmingroup", idruleadmin)
 	flag := models.Get_listitemsearch(ruleadmin, ",", client.Page)
 

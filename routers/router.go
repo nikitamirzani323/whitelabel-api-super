@@ -105,6 +105,8 @@ func Init() *fiber.App {
 	app.Post("/api/currsave", middleware.JWTProtected(), controllers.CurrSave)
 	app.Post("/api/catebank", middleware.JWTProtected(), controllers.Catebankhome)
 	app.Post("/api/catebanksave", middleware.JWTProtected(), controllers.CatebankSave)
+	app.Post("/api/banktype", middleware.JWTProtected(), controllers.Banktypehome)
+	app.Post("/api/banktypesave", middleware.JWTProtected(), controllers.Banktypesave)
 
 	app.Post("/api/webagen", middleware.JWTProtected(), controllers.Websiteagenhome)
 	app.Post("/api/webagensave", middleware.JWTProtected(), controllers.Websiteagensave)
@@ -134,14 +136,6 @@ func Init() *fiber.App {
 	app.Post("/api/prediksislotsave", middleware.JWTProtected(), controllers.PrediksislotSave)
 	app.Post("/api/prediksislotdelete", middleware.JWTProtected(), controllers.PrediksislotDelete)
 	app.Post("/api/prediksislotgenerator", middleware.JWTProtected(), controllers.PrediksislotGenerator)
-
-	app.Post("/api/banner", middleware.JWTProtected(), controllers.Bannerhome)
-	app.Post("/api/bannersave", middleware.JWTProtected(), controllers.Bannersave)
-
-	app.Post("/api/employee", middleware.JWTProtected(), controllers.Employeehome)
-	app.Post("/api/employeebydepart", middleware.JWTProtected(), controllers.EmployeeByDepart)
-	app.Post("/api/employeebysalesperformance", middleware.JWTProtected(), controllers.EmployeeBySalesPerformance)
-	app.Post("/api/employeesave", middleware.JWTProtected(), controllers.EmployeeSave)
 
 	app.Post("/api/event", middleware.JWTProtected(), controllers.Eventhome)
 	app.Post("/api/eventdetail", middleware.JWTProtected(), controllers.Eventdetailhome)

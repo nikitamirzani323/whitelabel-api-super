@@ -2,7 +2,7 @@ package models
 
 import (
 	"context"
-	"log"
+	"fmt"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -77,9 +77,9 @@ func Save_adminrule(admin, idadmin, rule, sData string) (helpers.Response, error
 			if flag_insert {
 				flag = true
 				msg = "Succes"
-				log.Println(msg_insert)
+				fmt.Println(msg_insert)
 			} else {
-				log.Println(msg_insert)
+				fmt.Println(msg_insert)
 			}
 		} else {
 			msg = "Duplicate Entry"
@@ -91,16 +91,16 @@ func Save_adminrule(admin, idadmin, rule, sData string) (helpers.Response, error
 				SET ruleadmingroup=$1 
 				WHERE idadmin=$2 
 			`
-		log.Println(idadmin)
-		log.Println(rule)
+		fmt.Println(idadmin)
+		fmt.Println(rule)
 		flag_update, msg_update := Exec_SQL(sql_update, configs.DB_tbl_admingroup, "UPDATE", rule, idadmin)
 
 		if flag_update {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 

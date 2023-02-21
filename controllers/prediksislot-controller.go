@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 	"time"
@@ -83,10 +84,10 @@ func Prediksislothome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldprediksislot_home_redis+"_"+strconv.Itoa(client.Providerslot_id), result, 60*time.Minute)
-		log.Println("PREDIKSI SLOT MYSQL")
+		fmt.Println("PREDIKSI SLOT MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("PREDIKSI SLOT CACHE")
+		fmt.Println("PREDIKSI SLOT CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": "Success",
@@ -177,7 +178,7 @@ func PrediksislotDelete(c *fiber.Ctx) error {
 	name := claims["name"].(string)
 	temp_decp := helpers.Decryption(name)
 	client_admin, idruleadmin := helpers.Parsing_Decry(temp_decp, "==")
-	log.Println("RULE :" + client.Page)
+	fmt.Println("RULE :" + client.Page)
 	ruleadmin := models.Get_AdminRule("ruleadmingroup", idruleadmin)
 	flag := models.Get_listitemsearch(ruleadmin, ",", client.Page)
 
@@ -235,7 +236,7 @@ func PrediksislotGenerator(c *fiber.Ctx) error {
 	name := claims["name"].(string)
 	temp_decp := helpers.Decryption(name)
 	client_admin, idruleadmin := helpers.Parsing_Decry(temp_decp, "==")
-	log.Println("RULE :" + client.Page)
+	fmt.Println("RULE :" + client.Page)
 	ruleadmin := models.Get_AdminRule("ruleadmingroup", idruleadmin)
 	flag := models.Get_listitemsearch(ruleadmin, ",", client.Page)
 

@@ -3,6 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"log"
 	"strings"
 
@@ -24,9 +25,9 @@ func Get_counter(field_column string) int {
 	row := con.QueryRowContext(ctx, sqlcounter, field_column)
 	switch e := row.Scan(&counter); e {
 	case sql.ErrNoRows:
-		log.Println("COUNTER - No rows were returned!")
+		fmt.Println("COUNTER - No rows were returned!")
 	case nil:
-		log.Println(counter)
+		fmt.Println(counter)
 	default:
 		panic(e)
 	}
@@ -39,7 +40,7 @@ func Get_counter(field_column string) int {
 		a, e := res.RowsAffected()
 		helpers.ErrorCheck(e)
 		if a > 0 {
-			log.Println("COUNTER - UPDATE")
+			fmt.Println("COUNTER - UPDATE")
 		}
 	} else {
 		stmt, e := con.PrepareContext(ctx, "insert into "+configs.DB_tbl_counter+" (nmcounter, counter) values ($1, $2)")
@@ -48,8 +49,8 @@ func Get_counter(field_column string) int {
 		helpers.ErrorCheck(e)
 		id, e := res.RowsAffected()
 		helpers.ErrorCheck(e)
-		log.Println("Insert id", id)
-		log.Println("NEW")
+		fmt.Println("Insert id", id)
+		fmt.Println("NEW")
 		idrecord_counter = 1
 	}
 	return idrecord_counter
@@ -77,7 +78,7 @@ func CheckDB(table, field, value string) bool {
 	row := con.QueryRowContext(ctx, sql_db, value)
 	switch e := row.Scan(&field); e {
 	case sql.ErrNoRows:
-		log.Println("CHECK DB - No rows were returned!")
+		fmt.Println("CHECK DB - No rows were returned!")
 		flag = false
 	case nil:
 		flag = true
@@ -96,11 +97,11 @@ func CheckDBTwoField(table, field_1, value_1, field_2, value_2 string) bool {
 					WHERE ` + field_1 + ` = $1 
 					AND ` + field_2 + ` = $2
 				`
-	log.Println(sql_db)
+	fmt.Println(sql_db)
 	row := con.QueryRowContext(ctx, sql_db, value_1, value_2)
 	switch e := row.Scan(&field_1); e {
 	case sql.ErrNoRows:
-		log.Println("CHECKDBTWOFIELD - No rows were returned!")
+		fmt.Println("CHECKDBTWOFIELD - No rows were returned!")
 		flag = false
 	case nil:
 		flag = true
@@ -120,11 +121,11 @@ func CheckDBThreeField(table, field_1, value_1, field_2, value_2, field_3, value
 					AND ` + field_2 + ` = $2 
 					AND ` + field_3 + ` = $3 
 				`
-	log.Println(sql_db)
+	fmt.Println(sql_db)
 	row := con.QueryRowContext(ctx, sql_db, value_1, value_2, value_3)
 	switch e := row.Scan(&field_1); e {
 	case sql.ErrNoRows:
-		log.Println("CHECKDBTHREEFIELD - No rows were returned!")
+		fmt.Println("CHECKDBTHREEFIELD - No rows were returned!")
 		flag = false
 	case nil:
 		flag = true

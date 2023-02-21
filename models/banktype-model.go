@@ -2,7 +2,8 @@ package models
 
 import (
 	"context"
-	"log"
+	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -13,7 +14,7 @@ import (
 	"github.com/nleeper/goment"
 )
 
-func Fetch_banktypeHome() (helpers.Response, error) {
+func Fetch_banktypeHome(idcatebank int) (helpers.Response, error) {
 	var obj entities.Model_banktype
 	var arraobj []entities.Model_banktype
 	var res helpers.Response
@@ -29,10 +30,11 @@ func Fetch_banktypeHome() (helpers.Response, error) {
 			A.updatebanktype, to_char(COALESCE(A.updatedatebanktype,now()), 'YYYY-MM-DD HH24:MI:SS') 
 			FROM ` + configs.DB_tbl_mst_banktype + ` as A   
 			JOIN ` + configs.DB_tbl_mst_catebank + ` as B ON B.idcatebank = A.idcatebank   
+			WHERE A.idcatebank where = "` + strconv.Itoa(idcatebank) + `"
 			ORDER BY A.updatedatebanktype DESC   
 	`
 
-	row, err := con.QueryContext(ctx, sql_select)
+	row, err := con.QueryContext(ctx, sql_select, idcatebank)
 	helpers.ErrorCheck(err)
 	for row.Next() {
 		var (
@@ -55,6 +57,7 @@ func Fetch_banktypeHome() (helpers.Response, error) {
 
 		obj.Banktype_id = idbanktype_db
 		obj.Banktype_nmcatebank = nmcatebank_db
+		obj.Banktype_name = nmbanktype_db
 		obj.Banktype_img = imgbanktype_db
 		obj.Banktype_status = statusbanktype_db
 		obj.Banktype_create = create
@@ -98,7 +101,7 @@ func Save_banktype(admin, idrecord, name, img, status, sData string, idcatebank 
 			if flag_insert {
 				msg = "Succes"
 			} else {
-				log.Println(msg_insert)
+				fmt.Println(msg_insert)
 			}
 		} else {
 			msg = "Duplicate Entry"
@@ -119,7 +122,7 @@ func Save_banktype(admin, idrecord, name, img, status, sData string, idcatebank 
 			flag = true
 			msg = "Succes"
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 

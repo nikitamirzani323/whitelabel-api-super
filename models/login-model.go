@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"log"
+	"fmt"
 
 	"github.com/nikitamirzani323/whitelabel/whitelabel_api_super/configs"
 	"github.com/nikitamirzani323/whitelabel/whitelabel_api_super/db"
@@ -26,7 +26,7 @@ func Login_Model(username, password, ipaddress, timezone string) (bool, string, 
 			AND statuslogin = 'Y' 
 		`
 
-	log.Println(sql_select, username)
+	fmt.Println(sql_select, username)
 	row := con.QueryRowContext(ctx, sql_select, username)
 	switch e := row.Scan(&passwordDB, &idadminDB); e {
 	case sql.ErrNoRows:
@@ -38,8 +38,8 @@ func Login_Model(username, password, ipaddress, timezone string) (bool, string, 
 	}
 
 	hashpass := helpers.HashPasswordMD5(password)
-	log.Println("Password : " + hashpass)
-	log.Println("Hash : " + passwordDB)
+	fmt.Println("Password : " + hashpass)
+	fmt.Println("Hash : " + passwordDB)
 	if hashpass != passwordDB {
 		return false, "", nil
 	}
@@ -62,9 +62,9 @@ func Login_Model(username, password, ipaddress, timezone string) (bool, string, 
 
 		if flag_update {
 			flag = true
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 

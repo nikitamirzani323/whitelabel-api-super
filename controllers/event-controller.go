@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 	"time"
@@ -66,10 +67,10 @@ func Eventhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldevent_home_redis, result, 60*time.Minute)
-		log.Println("EVENT  MYSQL")
+		fmt.Println("EVENT  MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("EVENT CACHE")
+		fmt.Println("EVENT CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": "Success",
@@ -144,10 +145,10 @@ func Eventdetailhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldeventdetail_home_redis+"_"+strconv.Itoa(client.Event_id)+"_"+strconv.Itoa(client.Event_idmemberagen), result, 60*time.Minute)
-		log.Println("EVENT DETAIL  MYSQL")
+		fmt.Println("EVENT DETAIL  MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("EVENT DETAIL CACHE")
+		fmt.Println("EVENT DETAIL CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": "Success",
@@ -222,10 +223,10 @@ func Eventdetailwinner(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldeventwinner_home_redis+"_"+strconv.Itoa(client.Event_id), result, 60*time.Minute)
-		log.Println("EVENT DETAIL WINNER  MYSQL")
+		fmt.Println("EVENT DETAIL WINNER  MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("EVENT DETAIL WINNER CACHE")
+		fmt.Println("EVENT DETAIL WINNER CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": "Success",
@@ -294,10 +295,10 @@ func Eventgroupdetailhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldeventdetailgroup_home_redis+"_"+strconv.Itoa(client.Event_id), result, 60*time.Minute)
-		log.Println("EVENT GROUP DETAIL  MYSQL")
+		fmt.Println("EVENT GROUP DETAIL  MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("EVENT GROUP DETAIL CACHE")
+		fmt.Println("EVENT GROUP DETAIL CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": "Success",

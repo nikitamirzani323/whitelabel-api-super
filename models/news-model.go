@@ -3,7 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
-	"log"
+	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -137,9 +137,9 @@ func Save_news(admin, sdata, title, descp, url, image string, idrecord, category
 		if flag_insert {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		} else {
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		}
 	} else {
 		sql_update := `
@@ -158,9 +158,9 @@ func Save_news(admin, sdata, title, descp, url, image string, idrecord, category
 		if flag_update {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 
@@ -197,9 +197,9 @@ func Delete_news(admin string, idnews int) (helpers.Response, error) {
 		if flag_delete {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_delete)
+			fmt.Println(msg_delete)
 		} else {
-			log.Println(msg_delete)
+			fmt.Println(msg_delete)
 		}
 	} else {
 		msg = "Data Not Found"
@@ -311,9 +311,9 @@ func Save_category(admin, name, status, sdata string, idrecord, display int) (he
 		if flag_insert {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		} else {
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		}
 	} else {
 		sql_update := `
@@ -331,9 +331,9 @@ func Save_category(admin, name, status, sdata string, idrecord, display int) (he
 		if flag_update {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 
@@ -372,9 +372,9 @@ func Delete_category(admin string, idrecord int) (helpers.Response, error) {
 			if flag_delete {
 				flag = true
 				msg = "Succes"
-				log.Println(msg_delete)
+				fmt.Println(msg_delete)
 			} else {
-				log.Println(msg_delete)
+				fmt.Println(msg_delete)
 			}
 		} else {
 			msg = "Cannot Delete"

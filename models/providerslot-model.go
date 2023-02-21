@@ -3,7 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
-	"log"
+	"fmt"
 	"strconv"
 	"time"
 
@@ -115,9 +115,9 @@ func Save_providerslot(
 
 		if flag_insert {
 			msg = "Succes"
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		} else {
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		}
 	} else {
 		sql_update := `
@@ -137,9 +137,9 @@ func Save_providerslot(
 
 		if flag_update {
 			msg = "Succes"
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 

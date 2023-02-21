@@ -3,6 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"log"
 	"strconv"
 	"time"
@@ -130,9 +131,9 @@ func Save_album(admin, datacloudflare, sData string) (helpers.Response, error) {
 				if flag_insert {
 					flag = true
 					msg = "Succes"
-					log.Println(msg_insert)
+					fmt.Println(msg_insert)
 				} else {
-					log.Println(msg_insert)
+					fmt.Println(msg_insert)
 				}
 			}
 		})
@@ -166,9 +167,9 @@ func Update_album(admin, signedurl string, idrecord int) bool {
 
 	if flag_update {
 		flag = true
-		log.Println(msg_update)
+		fmt.Println(msg_update)
 	} else {
-		log.Println(msg_update)
+		fmt.Println(msg_update)
 	}
 
 	return flag
@@ -186,7 +187,7 @@ func Delete_album(admin string, idrecord, idmovie int) bool {
 
 	if flag_delete {
 		flag = true
-		log.Println(msg_delete)
+		fmt.Println(msg_delete)
 		flag_movie := CheckDB(configs.DB_tbl_trx_movie, "movieid", strconv.Itoa(idmovie))
 
 		if flag_movie {
@@ -202,13 +203,13 @@ func Delete_album(admin string, idrecord, idmovie int) bool {
 				admin, tglnow.Format("YYYY-MM-DD HH:mm:ss"), idmovie)
 			if flag_update {
 				flag = true
-				log.Println(msg_update)
+				fmt.Println(msg_update)
 			} else {
-				log.Println(msg_update)
+				fmt.Println(msg_update)
 			}
 		}
 	} else {
-		log.Println(msg_delete)
+		fmt.Println(msg_delete)
 	}
 
 	return flag

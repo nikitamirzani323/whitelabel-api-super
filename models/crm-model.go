@@ -3,6 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -379,9 +380,9 @@ func Save_crm(admin, phone, nama, status, sData string, idrecord int) (helpers.R
 			if flag_insert {
 				flag = true
 				msg = "Succes"
-				log.Println(msg_insert)
+				fmt.Println(msg_insert)
 			} else {
-				log.Println(msg_insert)
+				fmt.Println(msg_insert)
 			}
 		} else {
 			msg = "Duplicate Entry"
@@ -401,9 +402,9 @@ func Save_crm(admin, phone, nama, status, sData string, idrecord int) (helpers.R
 		if flag_update {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 
@@ -440,9 +441,9 @@ func Save_crmstatus(admin, status string, idrecord int) (helpers.Response, error
 
 	if flag_update {
 		msg = "Succes"
-		log.Println(msg_update)
+		fmt.Println(msg_update)
 	} else {
-		log.Println(msg_update)
+		fmt.Println(msg_update)
 	}
 
 	res.Status = fiber.StatusOK
@@ -477,9 +478,9 @@ func Save_crmsales(admin, phone, username string) (helpers.Response, error) {
 
 	if flag_insert {
 		msg = "Succes"
-		log.Println(msg_insert)
+		fmt.Println(msg_insert)
 	} else {
-		log.Println(msg_insert)
+		fmt.Println(msg_insert)
 	}
 
 	res.Status = fiber.StatusOK
@@ -507,9 +508,9 @@ func Delete_crmsales(phone string, idrecord int) (helpers.Response, error) {
 		if flag_delete {
 			flag = true
 			msg = "Succes"
-			log.Println(msg_delete)
+			fmt.Println(msg_delete)
 		} else {
-			log.Println(msg_delete)
+			fmt.Println(msg_delete)
 		}
 	} else {
 		msg = "Data Not Found"
@@ -555,9 +556,9 @@ func Save_crmsource(admin, datasource, source, sData string) (helpers.Response, 
 
 				if flag_insert {
 					msg = "Succes"
-					log.Println(msg_insert)
+					fmt.Println(msg_insert)
 				} else {
-					log.Println(msg_insert)
+					fmt.Println(msg_insert)
 				}
 			}
 		})
@@ -603,9 +604,9 @@ func Save_crmdatabase(admin, datasource, source, sData string) (helpers.Response
 
 				if flag_insert {
 					msg = "Succes"
-					log.Println(msg_insert)
+					fmt.Println(msg_insert)
 				} else {
-					log.Println(msg_insert)
+					fmt.Println(msg_insert)
 				}
 			}
 		})
@@ -647,9 +648,9 @@ func Save_crmmaintenance(admin, datasource, sData string) (helpers.Response, err
 
 				if flag_update {
 					msg = "Succes"
-					log.Println(msg_update)
+					fmt.Println(msg_update)
 				} else {
-					log.Println(msg_update)
+					fmt.Println(msg_update)
 				}
 			}
 		})
@@ -787,7 +788,7 @@ func Fetch_crmduniafilm(search string, page int) (helpers.Responsemovie, error) 
 		sql_select += "ORDER BY username ASC  LIMIT " + strconv.Itoa(perpage)
 	}
 
-	log.Println(sql_select)
+	fmt.Println(sql_select)
 
 	row, err := con.QueryContext(ctx, sql_select)
 	helpers.ErrorCheck(err)

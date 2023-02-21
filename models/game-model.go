@@ -3,7 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
-	"log"
+	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -59,7 +59,7 @@ func Fetch_gameHome(search string, page int) (helpers.Responsemovie, error) {
 		sql_select += "OR LOWER(nmgame) LIKE '%" + strings.ToLower(search) + "%' "
 		sql_select += "ORDER BY createdategame DESC  LIMIT " + strconv.Itoa(perpage)
 	}
-	log.Println(sql_select)
+	fmt.Println(sql_select)
 	row, err := con.QueryContext(ctx, sql_select)
 	helpers.ErrorCheck(err)
 	for row.Next() {
@@ -126,9 +126,9 @@ func Save_game(admin, sdata, name string, idrecord int) (helpers.Response, error
 
 		if flag_insert {
 			msg = "Succes"
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		} else {
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		}
 	} else {
 		sql_update := `
@@ -143,9 +143,9 @@ func Save_game(admin, sdata, name string, idrecord int) (helpers.Response, error
 
 		if flag_update {
 			msg = "Succes"
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 

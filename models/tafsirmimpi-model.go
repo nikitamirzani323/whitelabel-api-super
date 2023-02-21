@@ -3,6 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -146,7 +147,7 @@ func Save_tafsirmimpi(admin, mimpi, artimimpi, angka2d, angka3d, angka4d, status
 		helpers.ErrorCheck(e)
 		if insert > 0 {
 			msg = "Succes"
-			log.Println("Data Berhasil di save")
+			fmt.Println("Data Berhasil di save")
 		}
 	} else {
 		sql_update := `
@@ -173,7 +174,7 @@ func Save_tafsirmimpi(admin, mimpi, artimimpi, angka2d, angka3d, angka4d, status
 			msg = "Succes"
 			log.Printf("Update PASARAN Success : %d\n", idrecord)
 		} else {
-			log.Println("Update PASARAN failed")
+			fmt.Println("Update PASARAN failed")
 		}
 	}
 

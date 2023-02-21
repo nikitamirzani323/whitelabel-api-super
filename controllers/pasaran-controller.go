@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -73,10 +74,10 @@ func Pasaranhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Field_home_redis, result, 180*time.Minute)
-		log.Println("PASARAN MYSQL")
+		fmt.Println("PASARAN MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("PASARAN CACHE")
+		fmt.Println("PASARAN CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": message_RD,
@@ -195,10 +196,10 @@ func Keluaranhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Field_keluaran_redis+"_"+client.Pasaran_id, result, 180*time.Minute)
-		log.Println("KELUARAN MYSQL")
+		fmt.Println("KELUARAN MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("KELUARAN CACHE")
+		fmt.Println("KELUARAN CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": message_RD,
@@ -360,10 +361,10 @@ func Prediksihome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Field_prediksi_redis+"_"+client.Pasaran_id, result, 180*time.Minute)
-		log.Println("PREDIKSI MYSQL")
+		fmt.Println("PREDIKSI MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("PREDIKSI CACHE")
+		fmt.Println("PREDIKSI CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": message_RD,

@@ -9,6 +9,10 @@ type Model_banktype struct {
 	Banktype_create     string `json:"banktype_create"`
 	Banktype_update     string `json:"banktype_update"`
 }
+
+type Controller_banktypehome struct {
+	Banktype_idcatebank int `json:"banktype_idcatebank" `
+}
 type Controller_banktypesave struct {
 	Page                string `json:"page" validate:"required"`
 	Sdata               string `json:"sdata" validate:"required"`

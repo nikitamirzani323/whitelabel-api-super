@@ -2,7 +2,7 @@ package models
 
 import (
 	"context"
-	"log"
+	"fmt"
 	"strconv"
 	"time"
 
@@ -111,9 +111,9 @@ func Save_prediksislot(
 
 		if flag_insert {
 			msg = "Succes"
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		} else {
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		}
 	} else {
 		sql_update := `
@@ -131,9 +131,9 @@ func Save_prediksislot(
 
 		if flag_update {
 			msg = "Succes"
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 
@@ -159,9 +159,9 @@ func Delete_prediksislot(admin string, idrecord, idproviderslot int) (helpers.Re
 
 	if flag_episode {
 		msg = "Succes"
-		log.Println(msg_episode)
+		fmt.Println(msg_episode)
 	} else {
-		log.Println(msg_episode)
+		fmt.Println(msg_episode)
 	}
 
 	res.Status = fiber.StatusOK
@@ -217,9 +217,9 @@ func Generator_prediksislot(admin string, idproviderslot int) (helpers.Response,
 
 		if flag_update {
 			msg = "Succes"
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 
 		msg = "Success"

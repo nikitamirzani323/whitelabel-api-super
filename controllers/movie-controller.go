@@ -60,7 +60,7 @@ func Moviehome(c *fiber.Ctx) error {
 			"record":  errors,
 		})
 	}
-	log.Println(client.Movie_page)
+	fmt.Println(client.Movie_page)
 	if client.Movie_search != "" {
 		val_movie := helpers.DeleteRedis(Fieldmovie_home_redis + "_" + strconv.Itoa(client.Movie_page) + "_" + client.Movie_search)
 		log.Printf("Redis Delete BACKEND MOVIE : %d", val_movie)
@@ -151,10 +151,10 @@ func Moviehome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldmovie_home_redis+"_"+strconv.Itoa(client.Movie_page)+"_"+client.Movie_search, result, 10*time.Minute)
-		log.Println("MOVIE MYSQL")
+		fmt.Println("MOVIE MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("MOVIE CACHE")
+		fmt.Println("MOVIE CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     message_RD,
@@ -192,10 +192,10 @@ func Moviehomenotcdn(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldmovienotcdn_home_redis, result, 2*time.Minute)
-		log.Println("MOVIE NOT CDN MYSQL")
+		fmt.Println("MOVIE NOT CDN MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("MOVIE NOT CDN")
+		fmt.Println("MOVIE NOT CDN")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": message_RD,
@@ -267,10 +267,10 @@ func Movieminihome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldmovie_home_redis+"_"+client.Movie_search, result, 10*time.Minute)
-		log.Println("MOVIE MINI MYSQL")
+		fmt.Println("MOVIE MINI MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("MOVIE MINI CACHE")
+		fmt.Println("MOVIE MINI CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     message_RD,
@@ -309,7 +309,7 @@ func Movietroublehome(c *fiber.Ctx) error {
 			"record":  errors,
 		})
 	}
-	log.Println(client.Movie_page)
+	fmt.Println(client.Movie_page)
 	if client.Movie_search != "" {
 		val_movie := helpers.DeleteRedis(Fieldmovierouble_home_redis + "_" + strconv.Itoa(client.Movie_page) + "_" + client.Movie_search)
 		log.Printf("Redis Delete BACKEND MOVIE : %d", val_movie)
@@ -400,10 +400,10 @@ func Movietroublehome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldmovierouble_home_redis+"_"+strconv.Itoa(client.Movie_page)+"_"+client.Movie_search, result, 10*time.Minute)
-		log.Println("MOVIE TROUBLE MYSQL")
+		fmt.Println("MOVIE TROUBLE MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("MOVIE TROUBLE CACHE")
+		fmt.Println("MOVIE TROUBLE CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     message_RD,
@@ -518,7 +518,7 @@ func Moviedelete(c *fiber.Ctx) error {
 	name := claims["name"].(string)
 	temp_decp := helpers.Decryption(name)
 	client_admin, idruleadmin := helpers.Parsing_Decry(temp_decp, "==")
-	log.Println("RULE :" + client.Page)
+	fmt.Println("RULE :" + client.Page)
 	ruleadmin := models.Get_AdminRule("ruleadmingroup", idruleadmin)
 	flag := models.Get_listitemsearch(ruleadmin, ",", client.Page)
 
@@ -581,7 +581,7 @@ func Moviehomeseries(c *fiber.Ctx) error {
 			"record":  errors,
 		})
 	}
-	log.Println(client.Movie_page)
+	fmt.Println(client.Movie_page)
 	if client.Movie_search != "" {
 		val_movie := helpers.DeleteRedis(Fieldmovieseries_home_redis + "_" + strconv.Itoa(client.Movie_page) + "_" + client.Movie_search)
 		log.Printf("Redis Delete BACKEND MOVIE SERIES : %d", val_movie)
@@ -674,10 +674,10 @@ func Moviehomeseries(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldmovieseries_home_redis+"_"+strconv.Itoa(client.Movie_page)+"_"+client.Movie_search, result, 10*time.Minute)
-		log.Println("MOVIE SERIES MYSQL")
+		fmt.Println("MOVIE SERIES MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("MOVIE SERIES CACHE")
+		fmt.Println("MOVIE SERIES CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     message_RD,
@@ -716,7 +716,7 @@ func Moviehomeseriestrouble(c *fiber.Ctx) error {
 			"record":  errors,
 		})
 	}
-	log.Println(client.Movie_page)
+	fmt.Println(client.Movie_page)
 	if client.Movie_search != "" {
 		val_movie := helpers.DeleteRedis(Fieldmovieseriestrouble_home_redis + "_" + strconv.Itoa(client.Movie_page) + "_" + client.Movie_search)
 		log.Printf("Redis Delete BACKEND MOVIE SERIES : %d", val_movie)
@@ -809,10 +809,10 @@ func Moviehomeseriestrouble(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldmovieseriestrouble_home_redis+"_"+strconv.Itoa(client.Movie_page)+"_"+client.Movie_search, result, 10*time.Minute)
-		log.Println("MOVIE SERIES TROUBLE MYSQL")
+		fmt.Println("MOVIE SERIES TROUBLE MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("MOVIE SERIES TROUBLE CACHE")
+		fmt.Println("MOVIE SERIES TROUBLE CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     message_RD,
@@ -856,7 +856,7 @@ func Movieseriessave(c *fiber.Ctx) error {
 	name := claims["name"].(string)
 	temp_decp := helpers.Decryption(name)
 	client_admin, idruleadmin := helpers.Parsing_Decry(temp_decp, "==")
-	log.Println("RULE :" + client.Page)
+	fmt.Println("RULE :" + client.Page)
 	ruleadmin := models.Get_AdminRule("ruleadmingroup", idruleadmin)
 	flag := models.Get_listitemsearch(ruleadmin, ",", client.Page)
 
@@ -954,10 +954,10 @@ func Seasonhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldmovieseriesseason_home_redis+"_"+strconv.Itoa(client.Movie_id), result, 5*time.Minute)
-		log.Println("SEASON MYSQL")
+		fmt.Println("SEASON MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("SEASON CACHE")
+		fmt.Println("SEASON CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": message_RD,
@@ -999,7 +999,7 @@ func Seasonsave(c *fiber.Ctx) error {
 	name := claims["name"].(string)
 	temp_decp := helpers.Decryption(name)
 	client_admin, idruleadmin := helpers.Parsing_Decry(temp_decp, "==")
-	log.Println("RULE :" + client.Page)
+	fmt.Println("RULE :" + client.Page)
 	ruleadmin := models.Get_AdminRule("ruleadmingroup", idruleadmin)
 	flag := models.Get_listitemsearch(ruleadmin, ",", client.Page)
 
@@ -1062,7 +1062,7 @@ func Seasondelete(c *fiber.Ctx) error {
 	name := claims["name"].(string)
 	temp_decp := helpers.Decryption(name)
 	client_admin, idruleadmin := helpers.Parsing_Decry(temp_decp, "==")
-	log.Println("RULE :" + client.Page)
+	fmt.Println("RULE :" + client.Page)
 	ruleadmin := models.Get_AdminRule("ruleadmingroup", idruleadmin)
 	flag := models.Get_listitemsearch(ruleadmin, ",", client.Page)
 
@@ -1164,10 +1164,10 @@ func Episodehome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldmovieseriesepisode_home_redis+"_"+strconv.Itoa(client.Season_id), result, 5*time.Minute)
-		log.Println("EPISODE MYSQL")
+		fmt.Println("EPISODE MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("EPISODE CACHE")
+		fmt.Println("EPISODE CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": message_RD,
@@ -1209,7 +1209,7 @@ func Episodesave(c *fiber.Ctx) error {
 	name := claims["name"].(string)
 	temp_decp := helpers.Decryption(name)
 	client_admin, idruleadmin := helpers.Parsing_Decry(temp_decp, "==")
-	log.Println("RULE :" + client.Page)
+	fmt.Println("RULE :" + client.Page)
 	ruleadmin := models.Get_AdminRule("ruleadmingroup", idruleadmin)
 	flag := models.Get_listitemsearch(ruleadmin, ",", client.Page)
 
@@ -1276,7 +1276,7 @@ func Episodedelete(c *fiber.Ctx) error {
 	name := claims["name"].(string)
 	temp_decp := helpers.Decryption(name)
 	client_admin, idruleadmin := helpers.Parsing_Decry(temp_decp, "==")
-	log.Println("RULE :" + client.Page)
+	fmt.Println("RULE :" + client.Page)
 	ruleadmin := models.Get_AdminRule("ruleadmingroup", idruleadmin)
 	flag := models.Get_listitemsearch(ruleadmin, ",", client.Page)
 
@@ -1340,10 +1340,10 @@ func Genrehome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldgenre_home_redis, result, 0)
-		log.Println("GENRE MYSQL")
+		fmt.Println("GENRE MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("GENRE CACHE")
+		fmt.Println("GENRE CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": message_RD,
@@ -1385,7 +1385,7 @@ func Genresave(c *fiber.Ctx) error {
 	name := claims["name"].(string)
 	temp_decp := helpers.Decryption(name)
 	client_admin, idruleadmin := helpers.Parsing_Decry(temp_decp, "==")
-	log.Println("RULE :" + client.Page)
+	fmt.Println("RULE :" + client.Page)
 	ruleadmin := models.Get_AdminRule("ruleadmingroup", idruleadmin)
 	flag := models.Get_listitemsearch(ruleadmin, ",", client.Page)
 
@@ -1447,7 +1447,7 @@ func Genredelete(c *fiber.Ctx) error {
 	name := claims["name"].(string)
 	temp_decp := helpers.Decryption(name)
 	client_admin, idruleadmin := helpers.Parsing_Decry(temp_decp, "==")
-	log.Println("RULE :" + client.Page)
+	fmt.Println("RULE :" + client.Page)
 	ruleadmin := models.Get_AdminRule("ruleadmingroup", idruleadmin)
 	flag := models.Get_listitemsearch(ruleadmin, ",", client.Page)
 
@@ -1493,21 +1493,21 @@ func Movieuploadcloud(c *fiber.Ctx) error {
 
 	file, err := c.FormFile("file")
 	if err != nil {
-		log.Println("image upload error --> ", err)
+		fmt.Println("image upload error --> ", err)
 		return c.JSON(fiber.Map{"status": 500, "message": "Server error", "data": nil})
 
 	}
-	log.Println("File : ", file.Filename)
+	fmt.Println("File : ", file.Filename)
 	uniqueId := uuid.New()
 	filename := strings.Replace(uniqueId.String(), "-", "", -1)
 	fileExt := strings.Split(file.Filename, ".")[1]
 	image := fmt.Sprintf("%s.%s", filename, fileExt)
-	log.Println(image)
+	fmt.Println(image)
 	// path_imagelocal := `F:\ISBPROJECT\ISBPANEL\isbpanel_backend\frontend\public\images\` + image
 	path_imageserver := dir + dir_img
 	err = c.SaveFile(file, fmt.Sprintf(`%s/%s`, path_imageserver, image))
 	if err != nil {
-		log.Println("image save error --> ", err)
+		fmt.Println("image save error --> ", err)
 		return c.JSON(fiber.Map{"status": 500, "message": "Server error", "data": nil})
 	}
 
@@ -1529,7 +1529,7 @@ func Movieuploadcloud(c *fiber.Ctx) error {
 		SetContentLength(true).
 		Post("https://api.cloudflare.com/client/v4/accounts/dc5ba4b3b061907a5e1f8cdf1ae1ec96/images/v1")
 	if err != nil {
-		log.Println(err.Error())
+		fmt.Println(err.Error())
 	}
 	result := resp.Result().(*responseuploadcloudflare)
 	return c.JSON(fiber.Map{
@@ -1574,7 +1574,7 @@ func Movieupdatecloud(c *fiber.Ctx) error {
 	name := claims["name"].(string)
 	temp_decp := helpers.Decryption(name)
 	client_admin, idruleadmin := helpers.Parsing_Decry(temp_decp, "==")
-	log.Println("RULE :" + client.Page)
+	fmt.Println("RULE :" + client.Page)
 	ruleadmin := models.Get_AdminRule("ruleadmingroup", idruleadmin)
 	flag := models.Get_listitemsearch(ruleadmin, ",", client.Page)
 
@@ -1598,7 +1598,7 @@ func Movieupdatecloud(c *fiber.Ctx) error {
 			SetContentLength(true).
 			Patch("https://api.cloudflare.com/client/v4/accounts/dc5ba4b3b061907a5e1f8cdf1ae1ec96/images/v1/" + client.Movie_id)
 		if err != nil {
-			log.Println(err.Error())
+			fmt.Println(err.Error())
 		}
 		result := resp.Result().(*responseuploadcloudflare)
 
@@ -1647,7 +1647,7 @@ func Moviedeletecloud(c *fiber.Ctx) error {
 	name := claims["name"].(string)
 	temp_decp := helpers.Decryption(name)
 	client_admin, idruleadmin := helpers.Parsing_Decry(temp_decp, "==")
-	log.Println("RULE :" + client.Page)
+	fmt.Println("RULE :" + client.Page)
 	ruleadmin := models.Get_AdminRule("ruleadmingroup", idruleadmin)
 	flag := models.Get_listitemsearch(ruleadmin, ",", client.Page)
 
@@ -1667,18 +1667,18 @@ func Moviedeletecloud(c *fiber.Ctx) error {
 			SetContentLength(true).
 			Delete("https://api.cloudflare.com/client/v4/accounts/dc5ba4b3b061907a5e1f8cdf1ae1ec96/images/v1/" + client.Cloudflare_id)
 		if err != nil {
-			log.Println(err.Error())
+			fmt.Println(err.Error())
 		}
 		result := resp.Result().(*responseuploadcloudflare)
-		log.Println("Response Info:")
-		log.Println("  Error      :", err)
-		log.Println("  Status Code:", resp.StatusCode())
-		log.Println("  Status     :", resp.Status())
-		log.Println("  Proto      :", resp.Proto())
-		log.Println("  Time       :", resp.Time())
-		log.Println("  Received At:", resp.ReceivedAt())
-		log.Println("  Body       :\n", resp)
-		log.Println()
+		fmt.Println("Response Info:")
+		fmt.Println("  Error      :", err)
+		fmt.Println("  Status Code:", resp.StatusCode())
+		fmt.Println("  Status     :", resp.Status())
+		fmt.Println("  Proto      :", resp.Proto())
+		fmt.Println("  Time       :", resp.Time())
+		fmt.Println("  Received At:", resp.ReceivedAt())
+		fmt.Println("  Body       :\n", resp)
+		fmt.Println()
 		if result.Status {
 			if client.Album_id > 0 {
 				flag_album := models.Delete_album(client_admin, client.Album_id, client.Movie_id)
@@ -1703,7 +1703,7 @@ func Moviecloud(c *fiber.Ctx) error {
 		SetAuthToken("8x02SSARJt_A5B77KnL2oW74qwDPFKA_9DORcf1-").
 		Get("https://api.cloudflare.com/client/v4/accounts/dc5ba4b3b061907a5e1f8cdf1ae1ec96/images/v1")
 	if err != nil {
-		log.Println(err.Error())
+		fmt.Println(err.Error())
 	}
 	result := resp.Result().(*responseuploadcloudflare)
 	return c.JSON(fiber.Map{
@@ -1750,7 +1750,7 @@ func Moviecloud2(c *fiber.Ctx) error {
 		SetAuthToken("8x02SSARJt_A5B77KnL2oW74qwDPFKA_9DORcf1-").
 		Get(path_url)
 	if err != nil {
-		log.Println(err.Error())
+		fmt.Println(err.Error())
 	}
 	result := resp.Result().(*responseuploadcloudflare)
 	return c.JSON(fiber.Map{

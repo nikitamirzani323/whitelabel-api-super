@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -47,10 +48,10 @@ func Currencyhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldcurrency_home_redis, result, 60*time.Minute)
-		log.Println("CURR MYSQL")
+		fmt.Println("CURR MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("CURR CACHE")
+		fmt.Println("CURR CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": "Success",

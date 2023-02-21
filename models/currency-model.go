@@ -2,7 +2,7 @@ package models
 
 import (
 	"context"
-	"log"
+	"fmt"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -94,7 +94,7 @@ func Save_currency(admin, idrecord, nmcurr, sData string) (helpers.Response, err
 			if flag_insert {
 				msg = "Succes"
 			} else {
-				log.Println(msg_insert)
+				fmt.Println(msg_insert)
 			}
 		} else {
 			msg = "Duplicate Entry"
@@ -116,7 +116,7 @@ func Save_currency(admin, idrecord, nmcurr, sData string) (helpers.Response, err
 			flag = true
 			msg = "Succes"
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 

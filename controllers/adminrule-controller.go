@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -43,10 +44,10 @@ func Adminrulehome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldadminrule_home_redis, result, 60*time.Minute)
-		log.Println("ADMIN RULE MYSQL")
+		fmt.Println("ADMIN RULE MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("ADMIN RULE CACHE")
+		fmt.Println("ADMIN RULE CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": "Success",

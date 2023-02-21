@@ -3,7 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
-	"log"
+	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -59,7 +59,7 @@ func Fetch_websiteagenHome(search string, page int) (helpers.Responsemovie, erro
 		sql_select += "OR LOWER(nmwebagen) LIKE '%" + strings.ToLower(search) + "%' "
 		sql_select += "ORDER BY createwebagen DESC  LIMIT " + strconv.Itoa(perpage)
 	}
-	log.Println(sql_select)
+	fmt.Println(sql_select)
 	row, err := con.QueryContext(ctx, sql_select)
 	helpers.ErrorCheck(err)
 	for row.Next() {
@@ -127,9 +127,9 @@ func Save_websiteagen(admin, sdata, name, status string, idrecord int) (helpers.
 
 		if flag_insert {
 			msg = "Succes"
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		} else {
-			log.Println(msg_insert)
+			fmt.Println(msg_insert)
 		}
 	} else {
 		sql_update := `
@@ -145,9 +145,9 @@ func Save_websiteagen(admin, sdata, name, status string, idrecord int) (helpers.
 
 		if flag_update {
 			msg = "Succes"
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 

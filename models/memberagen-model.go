@@ -3,7 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
-	"log"
+	"fmt"
 	"strconv"
 	"time"
 
@@ -175,7 +175,7 @@ func Save_member(
 				//WEBSITE AGEN
 				_save_memberagen(admin, phone, listagen)
 			} else {
-				log.Println(msg_insert)
+				fmt.Println(msg_insert)
 			}
 		} else {
 			msg = "Duplicate Entry"
@@ -199,7 +199,7 @@ func Save_member(
 			_delete_memberagen(phone)
 			_save_memberagen(admin, phone, listagen)
 		} else {
-			log.Println(msg_update)
+			fmt.Println(msg_update)
 		}
 	}
 
@@ -235,7 +235,7 @@ func _save_memberagen(admin, phone, listagen string) {
 			admin, tglnow.Format("YYYY-MM-DD HH:mm:ss"))
 
 		if !flag_insertagen {
-			log.Println(msg_insertagen)
+			fmt.Println(msg_insertagen)
 		}
 	})
 }
@@ -248,7 +248,7 @@ func _delete_memberagen(phone string) {
 	flag_delete, msg_delete := Exec_SQL(sql_delete, configs.DB_tbl_trx_memberagen, "DELETE", phone)
 
 	if !flag_delete {
-		log.Println(msg_delete)
+		fmt.Println(msg_delete)
 	}
 }
 func _GetMemberAgen(idrecord int) (string, string) {

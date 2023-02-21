@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 	"time"
@@ -93,10 +94,10 @@ func Newshome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldnews_home_redis+"_"+strconv.Itoa(client.News_page)+"_"+client.News_search, result, 30*time.Minute)
-		log.Println("NEWS MYSQL")
+		fmt.Println("NEWS MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("NEWS CACHE")
+		fmt.Println("NEWS CACHE")
 		return c.JSON(fiber.Map{
 			"status":      fiber.StatusOK,
 			"message":     message_RD,
@@ -240,10 +241,10 @@ func Categoryhome(c *fiber.Ctx) error {
 			})
 		}
 		helpers.SetRedis(Fieldcategory_home_redis, result, 30*time.Minute)
-		log.Println("CATEGORY NEWS MYSQL")
+		fmt.Println("CATEGORY NEWS MYSQL")
 		return c.JSON(result)
 	} else {
-		log.Println("CATEGORY NEWS CACHE")
+		fmt.Println("CATEGORY NEWS CACHE")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": message_RD,

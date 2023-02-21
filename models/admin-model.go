@@ -3,7 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
-	"log"
+	"fmt"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -33,7 +33,7 @@ func Fetch_adminHome() (helpers.ResponseAdmin, error) {
 			FROM ` + configs.DB_tbl_admin + ` 
 			ORDER BY lastlogin DESC 
 		`
-	log.Println(sql_select)
+	fmt.Println(sql_select)
 	row, err := con.QueryContext(ctx, sql_select)
 
 	var no int = 0
@@ -213,9 +213,9 @@ func Save_adminHome(admin, username, password, nama, rule, status, sData string)
 			if flag_insert {
 				flag = true
 				msg = "Succes"
-				log.Println(msg_insert)
+				fmt.Println(msg_insert)
 			} else {
-				log.Println(msg_insert)
+				fmt.Println(msg_insert)
 			}
 		} else {
 			msg = "Duplicate Entry"
@@ -237,9 +237,9 @@ func Save_adminHome(admin, username, password, nama, rule, status, sData string)
 			if flag_update {
 				flag = true
 				msg = "Succes"
-				log.Println(msg_update)
+				fmt.Println(msg_update)
 			} else {
-				log.Println(msg_update)
+				fmt.Println(msg_update)
 			}
 		} else {
 			hashpass := helpers.HashPasswordMD5(password)
@@ -257,9 +257,9 @@ func Save_adminHome(admin, username, password, nama, rule, status, sData string)
 			if flag_update {
 				flag = true
 				msg = "Succes"
-				log.Println(msg_update)
+				fmt.Println(msg_update)
 			} else {
-				log.Println(msg_update)
+				fmt.Println(msg_update)
 			}
 		}
 	}
