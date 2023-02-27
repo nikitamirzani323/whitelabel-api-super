@@ -30,11 +30,11 @@ func Fetch_banktypeHome(idcatebank int) (helpers.Response, error) {
 			A.updatebanktype, to_char(COALESCE(A.updatedatebanktype,now()), 'YYYY-MM-DD HH24:MI:SS') 
 			FROM ` + configs.DB_tbl_mst_banktype + ` as A   
 			JOIN ` + configs.DB_tbl_mst_catebank + ` as B ON B.idcatebank = A.idcatebank   
-			WHERE A.idcatebank where = "` + strconv.Itoa(idcatebank) + `"
+			WHERE A.idcatebank = '` + strconv.Itoa(idcatebank) + `' 
 			ORDER BY A.updatedatebanktype DESC   
 	`
 
-	row, err := con.QueryContext(ctx, sql_select, idcatebank)
+	row, err := con.QueryContext(ctx, sql_select)
 	helpers.ErrorCheck(err)
 	for row.Next() {
 		var (
@@ -90,7 +90,7 @@ func Save_banktype(admin, idrecord, name, img, status, sData string, idcatebank 
 					idbanktype , idcatebank, nmbanktype, imgbanktype, statusbanktype,  
 					createbanktype, createdatebanktype 
 				) values (
-					$1, $2, $3, $4, $5
+					$1, $2, $3, $4, $5, 
 					$6, $7 
 				)
 			`
@@ -110,13 +110,13 @@ func Save_banktype(admin, idrecord, name, img, status, sData string, idcatebank 
 		sql_update := `
 				UPDATE 
 				` + configs.DB_tbl_mst_banktype + `  
-				SET idcatebank=$1, nmbanktype=$2, imgbanktype=$3 , statusbanktype=$4
-				updatebanktype=$5, updatedatebanktype=$6 
-				WHERE idbanktype =$7  
+				SET nmbanktype=$1, imgbanktype=$2, statusbanktype=$3, 
+				updatebanktype=$4, updatedatebanktype=$5  
+				WHERE idbanktype =$6   
 			`
 
 		flag_update, msg_update := Exec_SQL(sql_update, configs.DB_tbl_mst_banktype, "UPDATE",
-			idcatebank, name, img, status, admin, tglnow.Format("YYYY-MM-DD HH:mm:ss"), idrecord)
+			name, img, status, admin, tglnow.Format("YYYY-MM-DD HH:mm:ss"), idrecord)
 
 		if flag_update {
 			flag = true
