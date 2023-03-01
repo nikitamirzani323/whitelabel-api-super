@@ -13,7 +13,7 @@ import (
 	"github.com/nleeper/goment"
 )
 
-func Fetch_companyHome(idcatebank int) (helpers.Response, error) {
+func Fetch_companyHome() (helpers.Response, error) {
 	var obj entities.Model_company
 	var arraobj []entities.Model_company
 	var res helpers.Response
@@ -79,7 +79,7 @@ func Fetch_companyHome(idcatebank int) (helpers.Response, error) {
 
 	return res, nil
 }
-func Save_company(admin, idrecord, name, img, status, sData string, idcatebank int) (helpers.Response, error) {
+func Save_company(admin, idrecord, idcurr, nmcompany, nmowner, phoneowner, emailowner, companyurl, status, sData string) (helpers.Response, error) {
 	var res helpers.Response
 	msg := "Failed"
 	tglnow, _ := goment.New()
@@ -87,20 +87,24 @@ func Save_company(admin, idrecord, name, img, status, sData string, idcatebank i
 	flag := false
 
 	if sData == "New" {
-		flag = CheckDB(configs.DB_tbl_mst_company, "idbanktype", idrecord)
+		flag = CheckDB(configs.DB_tbl_mst_company, "idcompany", idrecord)
 		if !flag {
 			sql_insert := `
 				insert into
 				` + configs.DB_tbl_mst_company + ` (
-					idbanktype , idcatebank, nmbanktype, imgbanktype, statusbanktype,  
-					createbanktype, createdatebanktype 
+					idcompany , startjoincompany, endjoincompany, idcurr, nmcompany, nmowner,  
+					phoneowner , emailowner, companyurl, statuscompany,  
+					createcompany, createdatecompany 
 				) values (
-					$1, $2, $3, $4, $5, 
-					$6, $7 
+					$1, $2, $3, $4, $5, $6, 
+					$7, $8, $9, $10, 
+					$11, $12 
 				)
 			`
+			starttgl := tglnow.Format("YYYY-MM-DD HH:mm:ss")
 			flag_insert, msg_insert := Exec_SQL(sql_insert, configs.DB_tbl_mst_company, "INSERT",
-				idrecord, idcatebank, name, img, status,
+				idrecord, starttgl, starttgl, idcurr, nmcompany, nmowner,
+				phoneowner, emailowner, companyurl, status,
 				admin, tglnow.Format("YYYY-MM-DD HH:mm:ss"))
 
 			if flag_insert {
@@ -115,13 +119,14 @@ func Save_company(admin, idrecord, name, img, status, sData string, idcatebank i
 		sql_update := `
 				UPDATE 
 				` + configs.DB_tbl_mst_company + `  
-				SET nmbanktype=$1, imgbanktype=$2, statusbanktype=$3, 
-				updatebanktype=$4, updatedatebanktype=$5  
-				WHERE idbanktype =$6   
+				SET nmcompany=$1, nmowner=$2, phoneowner=$3, 
+				emailowner=$4, companyurl=$5, statuscompany=$6,  
+				updatecompany=$7, updatedatecompany=$8    
+				WHERE idcompany=$9   
 			`
 
 		flag_update, msg_update := Exec_SQL(sql_update, configs.DB_tbl_mst_company, "UPDATE",
-			name, img, status, admin, tglnow.Format("YYYY-MM-DD HH:mm:ss"), idrecord)
+			nmcompany, nmowner, phoneowner, emailowner, companyurl, status, admin, tglnow.Format("YYYY-MM-DD HH:mm:ss"), idrecord)
 
 		if flag_update {
 			flag = true
